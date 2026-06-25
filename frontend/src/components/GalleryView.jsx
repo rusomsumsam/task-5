@@ -1,4 +1,5 @@
 import InfiniteScroll from "react-infinite-scroll-component";
+import CoverCard from "./CoverCard";
 
 const GalleryView = ({
     songs,
@@ -24,11 +25,7 @@ const GalleryView = ({
                         key={`${song.index}-${song.id}`}
                         className="border rounded-lg p-4"
                     >
-                        <img
-                            src={song.cover}
-                            alt={song.title}
-                            className="h-40 w-full object-cover rounded mb-3"
-                        />
+                        <CoverCard song={song} />
 
                         <h3 className="font-semibold">
                             {song.title}

@@ -55,6 +55,35 @@ const generateReview = (rng) => {
     ];
 };
 
+const generatePreview = (rng) => {
+
+    const notePool = [
+        "C3", "D3", "E3", "F3", "G3", "A3", "B3",
+        "C4", "D4", "E4", "F4", "G4", "A4", "B4",
+        "C5", "D5", "E5", "F5", "G5", "A5", "B5"
+    ];
+
+    const notes = [];
+
+    const noteCount =
+        8 + Math.floor(rng() * 8);
+
+    for (let i = 0; i < noteCount; i++) {
+
+        notes.push(
+            notePool[
+            Math.floor(rng() * notePool.length)
+            ]
+        );
+
+    }
+
+    return {
+        tempo: 100 + Math.floor(rng() * 60),
+        notes
+    };
+};
+
 const generateSongs = ({
     seed,
     locale = "en",
@@ -68,14 +97,15 @@ const generateSongs = ({
             ? fakerDE
             : fakerEN_US;
 
-    const rng = createRng(`${seed}-${page}`);
+    const contentRng = createRng(`${seed}-${page}`);
+    const likesRng = createRng(`${seed}-${page}-likes`);
 
     const songs = [];
 
     for (let i = 1; i <= count; i++) {
 
         faker.seed(
-            Math.floor(rng() * 1000000)
+            Math.floor(contentRng() * 1000000)
         );
 
         const sequenceIndex =
@@ -84,16 +114,35 @@ const generateSongs = ({
         songs.push({
             index: sequenceIndex,
             id: i,
+
             title: faker.music.songName(),
-            artist: generateArtist(faker, rng),
-            album: generateAlbum(faker, rng),
+
+            artist: generateArtist(
+                faker,
+                contentRng
+            ),
+
+            album: generateAlbum(
+                faker,
+                contentRng
+            ),
+
             genre: faker.music.genre(),
-            likes: generateLikes(likes, rng),
 
-            review: generateReview(rng),
+            likes: generateLikes(
+                likes,
+                likesRng
+            ),
 
-            cover: `https://picsum.photos/seed/${seed}-${page}-${i}/300/300`
-        });   
+            review: generateReview(
+                contentRng
+            ),
+
+            preview: generatePreview(
+                contentRng
+            )
+        });
+
     }
 
     return songs;

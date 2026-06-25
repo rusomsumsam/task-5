@@ -14,6 +14,8 @@ const HomePage = () => {
 
     const [likes, setLikes] = useState(3.7);
 
+    const [page, setPage] = useState(1);
+
     useEffect(() => {
 
         const fetchSongs = async () => {
@@ -26,7 +28,7 @@ const HomePage = () => {
                         params: {
                             seed,
                             locale,
-                            page: 1,
+                            page,
                             likes
                         }
                     }
@@ -48,7 +50,7 @@ const HomePage = () => {
 
         fetchSongs();
 
-    }, [seed, locale, likes]);
+    }, [seed, locale, likes, page]);
 
     if (loading) {
         return (
@@ -72,9 +74,32 @@ const HomePage = () => {
                 setLocale={setLocale}
                 likes={likes}
                 setLikes={setLikes}
+                setPage={setPage}
             />
 
             <SongsTable songs={songs} />
+
+            <div className="flex items-center justify-center gap-3 mt-6">
+
+                <button
+                    onClick={() => setPage((prev) => Math.max(prev - 1, 1))}
+                    className="px-4 py-2 border rounded"
+                >
+                    Previous
+                </button>
+
+                <span className="font-semibold">
+                    Page {page}
+                </span>
+
+                <button
+                    onClick={() => setPage((prev) => prev + 1)}
+                    className="px-4 py-2 border rounded"
+                >
+                    Next
+                </button>
+
+            </div>
 
         </div>
     );

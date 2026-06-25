@@ -4,7 +4,8 @@ const Toolbar = ({
     locale,
     setLocale,
     likes,
-    setLikes
+    setLikes,
+    setPage
 }) => {
 
     const generateRandomSeed = () => {
@@ -15,6 +16,7 @@ const Toolbar = ({
             );
 
         setSeed(randomSeed.toString());
+        setPage(1);
     };
 
     return (
@@ -22,9 +24,10 @@ const Toolbar = ({
 
             <select
                 value={locale}
-                onChange={(e) =>
-                    setLocale(e.target.value)
-                }
+                onChange={(e) => {
+                    setLocale(e.target.value);
+                    setPage(1);
+                }}
                 className="border rounded px-3 py-2"
             >
                 <option value="en">
@@ -39,9 +42,10 @@ const Toolbar = ({
             <input
                 type="text"
                 value={seed}
-                onChange={(e) =>
-                    setSeed(e.target.value)
-                }
+                onChange={(e) => {
+                    setSeed(e.target.value);
+                    setPage(1);
+                }}
                 placeholder="Seed"
                 className="border rounded px-3 py-2"
             />
@@ -59,9 +63,10 @@ const Toolbar = ({
                 max="10"
                 step="0.1"
                 value={likes}
-                onChange={(e) =>
-                    setLikes(Number(e.target.value))
-                }
+                onChange={(e) => {
+                    setLikes(Number(e.target.value));
+                    setPage(1);
+                }}
                 className="border rounded px-3 py-2 w-28"
             />
 

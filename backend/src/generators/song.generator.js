@@ -35,6 +35,26 @@ const generateAlbum = (faker, rng) => {
     return faker.music.album();
 };
 
+const generateReview = (rng) => {
+
+    const reviews = [
+        "A memorable track with strong vocals and an energetic rhythm.",
+        "The production quality stands out from start to finish.",
+        "A catchy melody paired with impressive instrumentation.",
+        "One of the most engaging songs on the release.",
+        "The song delivers a balanced mix of emotion and energy.",
+        "A polished composition that remains enjoyable on repeated listens.",
+        "Creative arrangements and strong musical hooks make this track shine.",
+        "The performance feels authentic and professionally crafted.",
+        "A well-produced song with a distinctive sound and memorable chorus.",
+        "An enjoyable track that showcases excellent musical direction."
+    ];
+
+    return reviews[
+        Math.floor(rng() * reviews.length)
+    ];
+};
+
 const generateSongs = ({
     seed,
     locale = "en",
@@ -70,7 +90,7 @@ const generateSongs = ({
             genre: faker.music.genre(),
             likes: generateLikes(likes, rng),
 
-            review: "Excellent production quality with memorable melodies and strong instrumentation.",
+            review: generateReview(rng),
 
             cover: `https://picsum.photos/seed/${seed}-${page}-${i}/300/300`
         });   

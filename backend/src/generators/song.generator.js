@@ -23,7 +23,39 @@ const generateArtist = (faker, rng) => {
         return faker.person.fullName();
     }
 
-    return `${faker.word.adjective()} ${faker.word.noun()}s`;
+    const prefixes = [
+        "The",
+        "Neon",
+        "Electric",
+        "Midnight",
+        "Golden",
+        "Silent",
+        "Crystal",
+        "Burning",
+        "Northern",
+        "Silver"
+    ];
+
+    const nouns = [
+        "Wolves",
+        "Echoes",
+        "Rivers",
+        "Rebels",
+        "Horizons",
+        "Dreamers",
+        "Giants",
+        "Lights",
+        "Storms",
+        "Voyagers"
+    ];
+
+    const prefix =
+        prefixes[Math.floor(rng() * prefixes.length)];
+
+    const noun =
+        nouns[Math.floor(rng() * nouns.length)];
+
+    return `${prefix} ${noun}`;
 };
 
 const generateAlbum = (faker, rng) => {

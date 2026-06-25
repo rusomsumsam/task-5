@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 import Toolbar from "../components/Toolbar";
+import SongsTable from "../components/SongsTable";
 
 const HomePage = () => {
 
@@ -73,32 +74,7 @@ const HomePage = () => {
                 setLikes={setLikes}
             />
 
-            <div className="space-y-3">
-
-                {songs.map((song) => (
-
-                    <div
-                        key={song.index}
-                        className="border rounded-lg p-4"
-                    >
-                        <p>
-                            <strong>{song.index}</strong>
-                        </p>
-
-                        <p>{song.title}</p>
-
-                        <p>{song.artist}</p>
-
-                        <p>{song.album}</p>
-
-                        <p>{song.genre}</p>
-
-                        <p>❤️ {song.likes}</p>
-                    </div>
-
-                ))}
-
-            </div>
+            <SongsTable songs={songs} />
 
         </div>
     );

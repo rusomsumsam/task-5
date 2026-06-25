@@ -5,7 +5,9 @@ const Toolbar = ({
     setLocale,
     likes,
     setLikes,
-    setPage
+    setPage,
+    view,
+    setView
 }) => {
 
     const generateRandomSeed = () => {
@@ -69,6 +71,30 @@ const Toolbar = ({
                 }}
                 className="border rounded px-3 py-2 w-28"
             />
+
+            <div className="flex gap-2">
+
+                <button
+                    onClick={() => setView("table")}
+                    className={`px-4 py-2 rounded ${view === "table"
+                            ? "bg-blue-600 text-white"
+                            : "border"
+                        }`}
+                >
+                    Table
+                </button>
+
+                <button
+                    onClick={() => setView("gallery")}
+                    className={`px-4 py-2 rounded ${view === "gallery"
+                            ? "bg-blue-600 text-white"
+                            : "border"
+                        }`}
+                >
+                    Gallery
+                </button>
+
+            </div>
 
         </div>
     );

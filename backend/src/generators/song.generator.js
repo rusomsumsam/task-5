@@ -50,9 +50,9 @@ const generateSongs = ({
             artist: faker.person.fullName(),
             album: faker.music.album(),
             genre: faker.music.genre(),
-            likes: generateLikes(likes, rng)
-        });
-
+            likes: generateLikes(likes, rng),
+            review: faker.lorem.paragraph()
+        });        
     }
 
     return songs;

@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import Toolbar from "../components/Toolbar";
 import SongsTable from "../components/SongsTable";
+import GalleryView from "../components/GalleryView";
 
 const HomePage = () => {
 
@@ -15,6 +16,8 @@ const HomePage = () => {
     const [likes, setLikes] = useState(3.7);
 
     const [page, setPage] = useState(1);
+
+    const [view, setView] = useState("table");
 
     useEffect(() => {
 
@@ -75,32 +78,41 @@ const HomePage = () => {
                 likes={likes}
                 setLikes={setLikes}
                 setPage={setPage}
+                view={view}
+                setView={setView}
             />
 
-            <SongsTable songs={songs} />
+            {
+                view === "table"
+                    ? <SongsTable songs={songs} />
+                    : <GalleryView songs={songs} />
+            }
 
-            <div className="flex items-center justify-center gap-3 mt-6">
+            {
+                view === "table" && (
+                    <div className="flex items-center justify-center gap-3 mt-6">
 
-                <button
-                    onClick={() => setPage((prev) => Math.max(prev - 1, 1))}
-                    className="px-4 py-2 border rounded"
-                >
-                    Previous
-                </button>
+                        <button
+                            onClick={() => setPage((prev) => Math.max(prev - 1, 1))}
+                            className="px-4 py-2 border rounded"
+                        >
+                            Previous
+                        </button>
 
-                <span className="font-semibold">
-                    Page {page}
-                </span>
+                        <span className="font-semibold">
+                            Page {page}
+                        </span>
 
-                <button
-                    onClick={() => setPage((prev) => prev + 1)}
-                    className="px-4 py-2 border rounded"
-                >
-                    Next
-                </button>
+                        <button
+                            onClick={() => setPage((prev) => prev + 1)}
+                            className="px-4 py-2 border rounded"
+                        >
+                            Next
+                        </button>
 
-            </div>
-
+                    </div>
+                )
+            }            
         </div>
     );
 };

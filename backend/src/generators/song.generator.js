@@ -1,10 +1,20 @@
-const { faker } = require("@faker-js/faker");
+const {
+    fakerEN_US,
+    fakerDE
+} = require("@faker-js/faker");
+
 const { createRng } = require("../utils/seed.util");
 
 const generateSongs = ({
     seed,
+    locale = "en",
     count = 20
 }) => {
+
+    const faker =
+        locale === "de"
+            ? fakerDE
+            : fakerEN_US;
 
     const rng = createRng(seed);
 

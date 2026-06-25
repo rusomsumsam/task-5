@@ -1,7 +1,10 @@
 const { faker } = require("@faker-js/faker");
 const { createRng } = require("../utils/seed.util");
 
-const generateSongs = (seed, count = 20) => {
+const generateSongs = ({
+    seed,
+    count = 20
+}) => {
 
     const rng = createRng(seed);
 
@@ -9,7 +12,9 @@ const generateSongs = (seed, count = 20) => {
 
     for (let i = 1; i <= count; i++) {
 
-        faker.seed(Math.floor(rng() * 1000000));
+        faker.seed(
+            Math.floor(rng() * 1000000)
+        );
 
         songs.push({
             id: i,

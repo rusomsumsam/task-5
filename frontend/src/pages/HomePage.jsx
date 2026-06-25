@@ -1,10 +1,17 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
+import Toolbar from "../components/Toolbar";
 
 const HomePage = () => {
 
     const [songs, setSongs] = useState([]);
     const [loading, setLoading] = useState(true);
+
+    const [seed, setSeed] = useState("123");
+
+    const [locale, setLocale] = useState("en");
+
+    const [likes, setLikes] = useState(3.7);
 
     useEffect(() => {
 
@@ -16,10 +23,10 @@ const HomePage = () => {
                     "http://localhost:3001/api/songs",
                     {
                         params: {
-                            seed: 123,
-                            locale: "en",
+                            seed,
+                            locale,
                             page: 1,
-                            likes: 3.7
+                            likes
                         }
                     }
                 );
@@ -40,7 +47,7 @@ const HomePage = () => {
 
         fetchSongs();
 
-    }, []);
+    }, [seed, locale, likes]);
 
     if (loading) {
         return (
@@ -56,6 +63,14 @@ const HomePage = () => {
             <h1 className="text-3xl font-bold mb-6">
                 Music Store
             </h1>
+
+            <Toolbar
+                seed={seed}
+                setSeed={setSeed}
+                locale={locale}
+                setLocale={setLocale}
+                likes={likes}
+            />
 
             <div className="space-y-3">
 

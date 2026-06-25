@@ -5,13 +5,13 @@ const {
 const getSongs = (req, res) => {
 
     const seed = req.query.seed || "123";
-
-    const locale =
-        req.query.locale || "en";
+    const locale = req.query.locale || "en";
+    const page = Number(req.query.page) || 1;
 
     const songs = generateSongs({
         seed,
         locale,
+        page,
         count: 20
     });
 
@@ -19,6 +19,7 @@ const getSongs = (req, res) => {
         success: true,
         seed,
         locale,
+        page,
         songs
     });
 

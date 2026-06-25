@@ -8,6 +8,7 @@ const { createRng } = require("../utils/seed.util");
 const generateSongs = ({
     seed,
     locale = "en",
+    page = 1,
     count = 20
 }) => {
 
@@ -16,7 +17,7 @@ const generateSongs = ({
             ? fakerDE
             : fakerEN_US;
 
-    const rng = createRng(seed);
+    const rng = createRng(`${seed}-${page}`);
 
     const songs = [];
 
@@ -26,7 +27,11 @@ const generateSongs = ({
             Math.floor(rng() * 1000000)
         );
 
+        const sequenceIndex =
+            (page - 1) * count + i;
+
         songs.push({
+            index: sequenceIndex,
             id: i,
             title: faker.music.songName(),
             artist: faker.person.fullName(),

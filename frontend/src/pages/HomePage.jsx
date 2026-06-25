@@ -24,7 +24,7 @@ const HomePage = () => {
             try {
 
                 const response = await axios.get(
-                    "http://localhost:3001/api/songs",
+                    "https://task-5-5xvc.onrender.com/api/songs",
                     {
                         params: {
                             seed,

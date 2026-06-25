@@ -70,6 +70,7 @@ const HomePage = () => {
                 locale={locale}
                 setLocale={setLocale}
                 likes={likes}
+                setLikes={setLikes}
             />
 
             <div className="space-y-3">

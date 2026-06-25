@@ -60,7 +60,7 @@ const Toolbar = ({
                 step="0.1"
                 value={likes}
                 onChange={(e) =>
-                    setLikes(e.target.value)
+                    setLikes(Number(e.target.value))
                 }
                 className="border rounded px-3 py-2 w-28"
             />

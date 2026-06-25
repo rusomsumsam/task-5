@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
+
 import Toolbar from "../components/Toolbar";
 import SongsTable from "../components/SongsTable";
 import GalleryView from "../components/GalleryView";
@@ -10,13 +11,10 @@ const HomePage = () => {
     const [loading, setLoading] = useState(true);
 
     const [seed, setSeed] = useState("123");
-
     const [locale, setLocale] = useState("en");
-
     const [likes, setLikes] = useState(3.7);
 
     const [page, setPage] = useState(1);
-
     const [view, setView] = useState("table");
 
     useEffect(() => {
@@ -37,7 +35,25 @@ const HomePage = () => {
                     }
                 );
 
-                setSongs(response.data.songs);
+                if (view === "gallery") {
+
+                    setSongs((prevSongs) => {
+
+                        if (page === 1) {
+                            return response.data.songs;
+                        }
+
+                        return [
+                            ...prevSongs,
+                            ...response.data.songs
+                        ];
+                    });
+
+                } else {
+
+                    setSongs(response.data.songs);
+
+                }
 
             } catch (error) {
 
@@ -53,7 +69,7 @@ const HomePage = () => {
 
         fetchSongs();
 
-    }, [seed, locale, likes, page]);
+    }, [seed, locale, likes, page, view]);
 
     if (loading) {
         return (
@@ -62,6 +78,13 @@ const HomePage = () => {
             </div>
         );
     }
+
+    const fetchMoreSongs = () => {
+
+        setPage((prev) => prev + 1);
+
+    };
+    
 
     return (
         <div className="p-10">
@@ -85,7 +108,10 @@ const HomePage = () => {
             {
                 view === "table"
                     ? <SongsTable songs={songs} />
-                    : <GalleryView songs={songs} />
+                    : <GalleryView
+                        songs={songs}
+                        fetchMoreSongs={fetchMoreSongs}
+                    />
             }
 
             {
@@ -93,7 +119,9 @@ const HomePage = () => {
                     <div className="flex items-center justify-center gap-3 mt-6">
 
                         <button
-                            onClick={() => setPage((prev) => Math.max(prev - 1, 1))}
+                            onClick={() =>
+                                setPage((prev) => Math.max(prev - 1, 1))
+                            }
                             className="px-4 py-2 border rounded"
                         >
                             Previous
@@ -104,7 +132,9 @@ const HomePage = () => {
                         </span>
 
                         <button
-                            onClick={() => setPage((prev) => prev + 1)}
+                            onClick={() =>
+                                setPage((prev) => prev + 1)
+                            }
                             className="px-4 py-2 border rounded"
                         >
                             Next
@@ -112,7 +142,8 @@ const HomePage = () => {
 
                     </div>
                 )
-            }            
+            }
+
         </div>
     );
 };

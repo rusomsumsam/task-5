@@ -75,7 +75,10 @@ const Toolbar = ({
             <div className="flex gap-2">
 
                 <button
-                    onClick={() => setView("table")}
+                    onClick={() => {
+                        setView("table");
+                        setPage(1);
+                    }}
                     className={`px-4 py-2 rounded ${view === "table"
                             ? "bg-blue-600 text-white"
                             : "border"
@@ -85,7 +88,10 @@ const Toolbar = ({
                 </button>
 
                 <button
-                    onClick={() => setView("gallery")}
+                    onClick={() => {
+                        setView("gallery");
+                        setPage(1);
+                    }}
                     className={`px-4 py-2 rounded ${view === "gallery"
                             ? "bg-blue-600 text-white"
                             : "border"

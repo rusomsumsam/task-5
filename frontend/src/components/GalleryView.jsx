@@ -1,31 +1,45 @@
-const GalleryView = ({ songs }) => {
+import InfiniteScroll from "react-infinite-scroll-component";
+
+const GalleryView = ({
+    songs,
+    fetchMoreSongs
+}) => {
+
     return (
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+        <InfiniteScroll
+            dataLength={songs.length}
+            next={fetchMoreSongs}
+            hasMore={true}
+            loader={
+                <h4 className="text-center mt-4">
+                    Loading...
+                </h4>
+            }
+        >
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
 
-            {songs.map((song) => (
+                {songs.map((song) => (
 
-                <div
-                    key={song.index}
-                    className="border rounded-lg p-4 shadow-sm"
-                >
-                    <div className="h-40 bg-gray-200 rounded mb-3" />
+                    <div
+                        key={`${song.index}-${song.id}`}
+                        className="border rounded-lg p-4"
+                    >
+                        <div className="h-40 bg-gray-200 rounded mb-3" />
 
-                    <h3 className="font-semibold">
-                        {song.title}
-                    </h3>
+                        <h3 className="font-semibold">
+                            {song.title}
+                        </h3>
 
-                    <p className="text-sm text-gray-600">
-                        {song.artist}
-                    </p>
+                        <p>{song.artist}</p>
 
-                    <p className="mt-2">
-                        ❤️ {song.likes}
-                    </p>
-                </div>
+                        <p>❤️ {song.likes}</p>
 
-            ))}
+                    </div>
 
-        </div>
+                ))}
+
+            </div>
+        </InfiniteScroll>
     );
 };
 

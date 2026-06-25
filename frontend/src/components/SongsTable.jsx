@@ -70,7 +70,11 @@ const SongsTable = ({ songs }) => {
                                             <div className="grid md:grid-cols-3 gap-4">
 
                                                 <div className="h-40 bg-gray-200 rounded flex items-center justify-center">
-                                                    Cover Image
+                                                    <img
+                                                        src={song.cover}
+                                                        alt={song.title}
+                                                        className="w-40 rounded"
+                                                    />
                                                 </div>
 
                                                 <div>
@@ -81,7 +85,9 @@ const SongsTable = ({ songs }) => {
 
                                                 <div>
                                                     <h3 className="font-semibold mb-2">
-                                                        Review
+                                                        <p className="text-sm text-gray-600">
+                                                            {song.review}
+                                                        </p>
                                                     </h3>
 
                                                     <p className="text-sm text-gray-600">

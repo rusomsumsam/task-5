@@ -17,6 +17,24 @@ const generateLikes = (averageLikes, rng) => {
     return baseLikes + extraLike;
 };
 
+const generateArtist = (faker, rng) => {
+
+    if (rng() < 0.5) {
+        return faker.person.fullName();
+    }
+
+    return `${faker.word.adjective()} ${faker.word.noun()}s`;
+};
+
+const generateAlbum = (faker, rng) => {
+
+    if (rng() < 0.3) {
+        return "Single";
+    }
+
+    return faker.music.album();
+};
+
 const generateSongs = ({
     seed,
     locale = "en",
@@ -47,12 +65,15 @@ const generateSongs = ({
             index: sequenceIndex,
             id: i,
             title: faker.music.songName(),
-            artist: faker.person.fullName(),
-            album: faker.music.album(),
+            artist: generateArtist(faker, rng),
+            album: generateAlbum(faker, rng),
             genre: faker.music.genre(),
             likes: generateLikes(likes, rng),
-            review: faker.lorem.paragraph()
-        });        
+
+            review: "Excellent production quality with memorable melodies and strong instrumentation.",
+
+            cover: `https://picsum.photos/seed/${seed}-${page}-${i}/300/300`
+        });   
     }
 
     return songs;

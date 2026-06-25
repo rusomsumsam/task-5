@@ -24,7 +24,11 @@ const GalleryView = ({
                         key={`${song.index}-${song.id}`}
                         className="border rounded-lg p-4"
                     >
-                        <div className="h-40 bg-gray-200 rounded mb-3" />
+                        <img
+                            src={song.cover}
+                            alt={song.title}
+                            className="h-40 w-full object-cover rounded mb-3"
+                        />
 
                         <h3 className="font-semibold">
                             {song.title}

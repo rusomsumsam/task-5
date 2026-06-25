@@ -4,10 +4,13 @@ const {
 
 const getSongs = (req, res) => {
 
-    const songs = generateSongs();
+    const seed = req.query.seed || "123";
+
+    const songs = generateSongs(seed);
 
     res.status(200).json({
         success: true,
+        seed,
         songs
     });
 
